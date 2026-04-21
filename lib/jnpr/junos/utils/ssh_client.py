@@ -37,6 +37,12 @@ def open_ssh_client(dev):
     if dev._ssh_private_key_file is not None:
         kwargs["key_filename"] = dev._ssh_private_key_file
 
+    if dev._allow_agent is not None:
+        kwargs["allow_agent"] = dev._allow_agent
+
+    if dev._look_for_keys is not None:
+        kwargs["look_for_keys"] = dev._look_for_keys
+
     # pick hostname from .ssh config if any
     hostname = config.get("hostname", dev._hostname)
 
