@@ -22,18 +22,14 @@ def provides_facts():
 
 def _get_sat_dev(rsp, name):
     """Return the <satellite-device> element matching *name*, or first found."""
-    sat_dev = rsp.find(
-        ".//satellite-device[satellite-mgmt-ip='{}']".format(name)
-    )
+    sat_dev = rsp.find(".//satellite-device[satellite-mgmt-ip='{}']".format(name))
     return sat_dev if sat_dev is not None else rsp.find(".//satellite-device")
 
 
 def _collect_sw_facts(device, name, sat_facts):
     """Populate software version facts from get_software_information."""
     try:
-        rsp = device.rpc.get_software_information(
-            device_list=name, normalize=True
-        )
+        rsp = device.rpc.get_software_information(device_list=name, normalize=True)
         if rsp is None or rsp is True:
             return
         sat_dev = _get_sat_dev(rsp, name)
@@ -53,9 +49,7 @@ def _collect_sw_facts(device, name, sat_facts):
 def _collect_re_facts(device, name, sat_facts):
     """Populate RE facts from get_route_engine_information."""
     try:
-        rsp = device.rpc.get_route_engine_information(
-            device_list=name, normalize=True
-        )
+        rsp = device.rpc.get_route_engine_information(device_list=name, normalize=True)
         if rsp is None or rsp is True:
             return
         sat_dev = _get_sat_dev(rsp, name)
@@ -96,18 +90,15 @@ def _collect_re_facts(device, name, sat_facts):
 def _collect_chassis_facts(device, name, sat_facts):
     """Populate chassis inventory facts from get_chassis_inventory."""
     try:
-        rsp = device.rpc.get_chassis_inventory(
-            device_list=name, normalize=True
-        )
+        rsp = device.rpc.get_chassis_inventory(device_list=name, normalize=True)
         if rsp is None or rsp is True:
             return
         sat_dev = _get_sat_dev(rsp, name)
         if sat_dev is None:
             return
-        sat_facts["serialnumber"] = (
-            sat_dev.findtext(".//chassis[1]/serial-number")
-            or sat_dev.findtext('.//chassis-module[name="Midplane"]/serial-number')
-        )
+        sat_facts["serialnumber"] = sat_dev.findtext(
+            ".//chassis[1]/serial-number"
+        ) or sat_dev.findtext('.//chassis-module[name="Midplane"]/serial-number')
     except Exception:
         pass
 

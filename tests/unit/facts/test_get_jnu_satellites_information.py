@@ -72,9 +72,7 @@ class TestGetJnuSatellitesInformation(unittest.TestCase):
         if not args:
             return None
         if args[0].tag == "get-jnu-satellites-information":
-            return self._read_file(
-                "satellites_down_get-jnu-satellites-information.xml"
-            )
+            return self._read_file("satellites_down_get-jnu-satellites-information.xml")
         return None
 
     def _mock_satellites_rpc_error(self, *args, **kwargs):

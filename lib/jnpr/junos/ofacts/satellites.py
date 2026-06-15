@@ -1,8 +1,6 @@
 def _get_sat_dev(rsp, name):
     """Return the <satellite-device> element matching *name*, or first found."""
-    sat_dev = rsp.find(
-        ".//satellite-device[satellite-mgmt-ip='{}']".format(name)
-    )
+    sat_dev = rsp.find(".//satellite-device[satellite-mgmt-ip='{}']".format(name))
     return sat_dev if sat_dev is not None else rsp.find(".//satellite-device")
 
 
@@ -140,20 +138,17 @@ def facts_satellites(junos, facts):
                     if inv_rsp is not None and inv_rsp is not True:
                         sat_dev = _get_sat_dev(inv_rsp, name)
                         if sat_dev is not None:
-                            sat_facts["serialnumber"] = (
-                                sat_dev.findtext(".//chassis[1]/serial-number")
-                                or sat_dev.findtext(
-                                    './/chassis-module[name="Midplane"]/serial-number'
-                                )
+                            sat_facts["serialnumber"] = sat_dev.findtext(
+                                ".//chassis[1]/serial-number"
+                            ) or sat_dev.findtext(
+                                './/chassis-module[name="Midplane"]/serial-number'
                             )
                 except Exception:
                     pass
 
                 # --- virtual chassis facts ---
                 try:
-                    vc_rsp = junos.rpc.get_virtual_chassis_information(
-                        device_list=name
-                    )
+                    vc_rsp = junos.rpc.get_virtual_chassis_information(device_list=name)
                     if vc_rsp is not None and vc_rsp is not True:
                         sat_dev = _get_sat_dev(vc_rsp, name)
                         if sat_dev is not None and sat_dev.find(".//rpc-error") is None:

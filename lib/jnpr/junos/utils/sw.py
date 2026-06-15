@@ -207,9 +207,9 @@ class SW(Util):
                         v_ok = True
                     else:
                         overall_ok = False
-                        overall_msg += (
-                            "\nSatellite %s: validation raised error: %s"
-                            % (sat_name, str(e))
+                        overall_msg += "\nSatellite %s: validation raised error: %s" % (
+                            sat_name,
+                            str(e),
                         )
                         continue
                 if v_ok is not True:
