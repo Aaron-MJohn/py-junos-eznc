@@ -1,6 +1,9 @@
-## Release 2.8.1.dev0 - 19 May 2026
+## Release 2.8.10 - 1 Jun 2026
 ## Features Added
+- Upgraded Jinja2 version 3.1.6
 ## Bugs Fixed
+- Modified the eval operation to use the safe_eval operation in the PyEZ table view, addressing security vulnerabilities
+- Added hostname validation before substituting the hostname in the proxy_command
 
 ## Release 2.8.0 - 19 May 2026
 ## Features Added
