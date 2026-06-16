@@ -489,9 +489,9 @@ class SW(Util):
     def _parse_pkgadd_response(self, rsp):
         got = rsp.getparent()
         output_msg = "\n".join(
-            [i.text for i in got.findall("output") if i.text is not None]
+            [i.text for i in got.findall(".//output") if i.text is not None]
         )
-        package_result = got.findtext("package-result")
+        package_result = got.findtext(".//package-result")
         if package_result is None:
             # <package-result> is not present
             if "ERROR:" in output_msg and (
