@@ -1,4 +1,10 @@
-## Release 2.8.10 - 1 Jun 2026
+## Release 2.8.2 - 22 Jun 2026
+## Features Added
+- Gather facts for the satellite devices
+## Bugs Fixed
+- Updated the SW install output messages in the progress callback
+
+## Release 2.8.1 - 1 Jun 2026
 ## Features Added
 - Upgraded Jinja2 version 3.1.6
 ## Bugs Fixed
